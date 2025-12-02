@@ -39,8 +39,14 @@ class ChallengeController extends Controller
             'badge_id' => 'nullable|exists:badges,id',
             'published' => 'boolean',
             'duration' => 'required|date_format:H:i:s',
-            'steps.*' => 'nullable|string'
+            'steps.*' => 'nullable|string',
+            'image_path' => 'nullable|image|max:2048',
         ]);
+        $path = null;
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        }
 
         // 1. Challenge aanmaken
         $challenge = Challenge::create([
@@ -51,6 +57,7 @@ class ChallengeController extends Controller
             'published' => $request->published ? 1 : 0,
             'duration' => $request->duration,
             'user_id' => auth()->id(),
+            'image_path' => $path,
         ]);
 
         // 2. Steps opslaan (alleen als aanwezig)

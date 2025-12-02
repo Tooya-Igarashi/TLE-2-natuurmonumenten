@@ -1,8 +1,7 @@
 <x-app-layout class="text-white">
     <x-slot name="header">
-        <h2 class="text-xl font-bold">Create Challenge</h2>
+        <h2 class="text-xl font-bold text-white">Create Challenge</h2>
     </x-slot>
-    @vite('resources/js/app.js')
     <div class="max-w-4xl mx-auto p-6">
 
         <form method="POST" action="{{ route('challenges.store') }}" class="space-y-6">
@@ -28,6 +27,13 @@
                         <option value="{{ $difficulty->id }}">{{ $difficulty->difficulty }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            {{-- Image --}}
+            <div>
+                <label class="font-semibold text-white">Image</label>
+                <input type="file" name="image" accept="image/*"
+                       class="text-white px-2 py-1 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
             </div>
 
             {{-- OPTIONAL BADGE --}}
@@ -57,7 +63,7 @@
 
             {{-- TOGGLE FOR STEPS --}}
             <div>
-                <label class="font-semibold flex items-center gap-2">
+                <label class="font-semibold flex items-center gap-2 text-white">
                     <input type="checkbox" id="hasSteps">
                     This challenge has steps
                 </label>
@@ -85,5 +91,54 @@
 
         </form>
     </div>
+    @push('scripts')
+        document.addEventListener("DOMContentLoaded", () => {
+
+        const hasSteps = document.getElementById('hasSteps');
+        const stepsContainer = document.getElementById('stepsContainer');
+        const addStep = document.getElementById('addStep');
+        const stepsList = document.getElementById('stepsList');
+
+        hasSteps.addEventListener('change', () => {
+        stepsContainer.classList.toggle('hidden', !hasSteps.checked);
+        });
+
+        addStep.addEventListener('click', () => {
+        const stepDiv = document.createElement('div');
+        stepDiv.classList.add('step-item', 'border', 'p-4', 'rounded', 'mb-4');
+
+        stepDiv.innerHTML = `
+        <div class="step-header flex justify-between items-center mb-2">
+            <span class="step-title font-semibold"></span>
+            <button type="button" class="remove-step bg-red-500 text-white px-3 py-1 rounded">
+                Remove
+            </button>
+        </div>
+        <textarea name="steps[]" class="w-full border rounded p-2" rows="3" required></textarea>
+        `;
+
+        stepsList.appendChild(stepDiv);
+        updateStepNumbers();
+
+        const removeBtn = stepDiv.querySelector('.remove-step');
+        removeBtn.addEventListener('click', function () {
+        this.closest('.step-item').remove();
+        updateStepNumbers();
+        });
+        });
+
+        function updateStepNumbers() {
+        const steps = stepsList.querySelectorAll('.step-item');
+        steps.forEach((step, index) => {
+        const stepNumber = index + 1;
+        const titleSpan = step.querySelector('.step-title');
+        if (titleSpan) {
+        titleSpan.textContent = `Step ${stepNumber}`;
+        }
+        });
+        }
+
+        });
+    @endpush
 
 </x-app-layout>
