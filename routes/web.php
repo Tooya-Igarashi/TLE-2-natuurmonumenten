@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Middleware\AdminMiddleware;
@@ -26,3 +27,10 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 
 
 require __DIR__ . '/auth.php';
+Route::get('/submit', function () {
+    return view('upload');
+})->name('submit');
+
+Route::resource('upload', UploadController::class);
+
+require __DIR__.'/auth.php';
