@@ -32,7 +32,7 @@ class ChallengeController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'difficulty_id' => 'required|exists:difficulties,id',
@@ -42,28 +42,29 @@ class ChallengeController extends Controller
             'steps.*' => 'nullable|string',
             'image_path' => 'nullable|image|max:2048',
         ]);
+
         $path = null;
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
+        if ($request->hasFile('image_path')) {
+            $path = $request->file('image_path')->store('challenge_images', 'public');
         }
 
-        // 1. Challenge aanmaken
-        $challenge = Challenge::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'difficulty_id' => $request->difficulty_id,
-            'badge_id' => $request->badge_id,
-            'published' => $request->published ? 1 : 0,
-            'duration' => $request->duration,
-            'user_id' => auth()->id(),
-            'image_path' => $path,
-        ]);
+// 1. Challenge aanmaken
+        $challenge = new Challenge();
+        $challenge->title = $validated['title'];
+        $challenge->description = $validated['description'];
+        $challenge->difficulty_id = $validated['difficulty_id'];
+        $challenge->badge_id = $validated['badge_id'] ?? null;
+        $challenge->published = $validated['published'] ?? false;
+        $challenge->duration = $validated['duration'];
+        $challenge->user_id = auth()->id();
+        $challenge->image_path = $path;
+        $challenge->save();
 
-        // 2. Steps opslaan (alleen als aanwezig)
-        if ($request->steps) {
+// 2. Steps opslaan (alleen als aanwezig)
+        if ($request->has('steps') && $request->steps) {
             foreach ($request->steps as $index => $content) {
-                if (!empty($content)) {
+                if (!empty(trim($content))) {
                     $challenge->steps()->create([
                         'step_number' => $index + 1,
                         'step_description' => $content
@@ -72,7 +73,8 @@ class ChallengeController extends Controller
             }
         }
 
-        return redirect()->route('challenges.create')->with('success', 'Challenge created with steps!');
+
+        return redirect()->route('dashboard')->with('success', 'Challenge created with steps!');
     }
 
 }
