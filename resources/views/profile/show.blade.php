@@ -1,5 +1,6 @@
 <x-app-layout>
-    <div class="bg-gray-700 border rounded-2xl shadow p-5">
+    <div class="bg-gray-700 border rounded-2xl shadow p-6 max-w-7xl mx-auto">
+
 
         {{-- Bovenste grid: profiel + badges + rank --}}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -44,9 +45,10 @@
                             <p class="text-gray-500">Je hebt nog geen badges</p>
                         @endforelse
 
-                        <button class="mt-4 px-2 py-2 rounded-md border">
+                        <a href="{{ route('badges.library') }}"
+                           class="mt-4 px-2 py-2 rounded-md border hover:bg-gray-200">
                             Alle badges
-                        </button>
+                        </a>
                     </div>
 
                     {{-- Rank kolom --}}

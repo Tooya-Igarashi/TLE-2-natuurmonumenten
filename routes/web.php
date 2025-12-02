@@ -13,6 +13,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/badges', [\App\Http\Controllers\BadgeController::class, 'index'])->name('badges.library');
 });
 
 require __DIR__ . '/auth.php';

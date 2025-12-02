@@ -12,7 +12,9 @@ class BadgeController extends Controller
      */
     public function index()
     {
-        //
+        $allBadges = Badge::all(); // alle badges ophalen
+
+        return view('badges.index', compact('allBadges'));
     }
 
     /**
