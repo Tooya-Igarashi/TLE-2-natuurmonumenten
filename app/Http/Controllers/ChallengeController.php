@@ -3,31 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Challenge;
-use Illuminate\Database\Eloquent\Builder;
-use App\Models\Difficulty;
 use Illuminate\Http\Request;
-use App\Models\Badge;
 
 class ChallengeController extends Controller
 {
-    public function dashboard(Request $request)
-    {
-        $search = $request->input('search');
-
-        $challenges = Challenge::query()
-            ->when($search, function ($query, $search) {
-                $query->where('title', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%");
-            })->get();
-
-        return view('dashboard', ['challenges' => $challenges]);
-    }
-
     public function create()
     {
-        $difficulties = Difficulty::all();
-        $badges = Badge::all();
-        return view('admin.challenges.create', compact('difficulties', 'badges'));
+        return view('admin.challenges.create');
     }
 
     public function store(Request $request)

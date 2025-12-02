@@ -15,7 +15,7 @@ class Badge extends Model
         'description',
     ];
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function users()
     {
         return $this->belongsToMany(User::class, 'badge_user', 'id_badge', 'user_id')
             ->withPivot(['acquire'])

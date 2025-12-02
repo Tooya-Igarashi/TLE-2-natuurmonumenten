@@ -1,22 +1,15 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ChallengeController;
-use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
 });
-//
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [ChallengeController::class, 'dashboard'])->name('dashboard');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -24,17 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', AdminMiddleware::class])->group(function () {
-    Route::get('/admin/challenges/create', [ChallengeController::class, 'create'])->name('challenges.create');
-    Route::post('/admin/challenges', [ChallengeController::class, 'store'])->name('challenges.store');
-});
-
-
-require __DIR__ . '/auth.php';
-Route::get('/submit', function () {
-    return view('upload');
-})->name('submit');
-
-Route::resource('upload', UploadController::class);
+Route::post('/admin/submissions/{id}/approve', [\App\Http\Controllers\AdminSubmissionController::class, 'approve'])->name('submission.approve');
+Route::post('/admin/submissions/{id}/decline', [\App\Http\Controllers\AdminSubmissionController::class, 'decline'])->name('submission.decline');
+Route::post('/admin/submissions/{id}/approve', [\App\Http\Controllers\AdminSubmissionController::class, 'edit'])->name('submission.edit');
 
 require __DIR__.'/auth.php';
