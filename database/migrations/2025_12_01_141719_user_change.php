@@ -10,14 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('badges', function (Blueprint $table) {
-            $table->id();
-            $table->text('image')->nullable();
-            $table->string('name');
-            $table->longText('description')->nullable();
 
-            $table->timestamps();
-        });
     }
 
     /**
@@ -25,6 +18,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('badges');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_admin');
+            $table->dropColumn('rank');
+        });
     }
 };
