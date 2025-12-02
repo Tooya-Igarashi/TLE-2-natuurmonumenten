@@ -14,13 +14,13 @@ class ChallengeController extends Controller
     {
         $search = $request->input('search');
 
-        $challanges = Challenge::query()
+        $challenges = Challenge::query()
             ->when($search, function ($query, $search) {
                 $query->where('title', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%");
             })->get();
 
-        return view('dashboard', ['challenges' => $challanges]);
+        return view('dashboard', ['challenges' => $challenges]);
     }
 
     public function create()
