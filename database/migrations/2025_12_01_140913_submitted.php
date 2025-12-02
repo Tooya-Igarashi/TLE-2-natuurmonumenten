@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('user_id');
             $table->foreignId('challenge_id')->constrained('challenges')->cascadeOnDelete();
-            $table->text('content')->nullable();
+            $table->binary('content')->nullable();
             $table->boolean('pending')->default(true);
             $table->bigInteger('date')->nullable();
             $table->timestamps();
