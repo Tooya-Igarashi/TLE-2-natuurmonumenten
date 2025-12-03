@@ -25,6 +25,7 @@
         <th class="px-4 py-2">Duration</th>
         <th class="px-4 py-2">Created at</th>
         <th class="px-4 py-2">Updated at</th>
+            <th class="px-4 py-2">Details</th>
         </tr>
         </thead>
 
@@ -45,6 +46,11 @@
             <td class="px-4 py-2">{{ $challenges->duration }}</td>
             <td class="px-4 py-2">{{ $challenges->created_at }}</td>
             <td class="px-4 py-2">{{ $challenges->updated_at }}</td>
+            <td>
+                <a href="{{ route('admin.show', $challenges) }}"
+                   class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+                    Show
+                </a>
         </tr>
 
         @endforeach

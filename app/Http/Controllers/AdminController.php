@@ -15,4 +15,9 @@ class AdminController extends Controller
         $difficulty = Difficulty::all();
         return view('admin.dashboard', compact('challenge'), compact('difficulty'));
     }
+
+    public function show(Challenge $challenge)
+    {
+        return view('admin.show', compact('challenge'));
+    }
 }
