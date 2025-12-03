@@ -19,7 +19,9 @@ class UploadController extends Controller
     public function index()
     {
         $challenges = Challenge::all();
+
         return view('upload', compact('challenges'));
+
     }
 
     /**
@@ -45,24 +47,23 @@ class UploadController extends Controller
 
         $photo = new Upload();
         $photo->content = $nameOfFile;
-        $photo->user_id = 1;
+        $photo->user_id = auth()->id();
         $photo->challenge_id = 1;
         $photo->pending = false;
         $photo->save();
 
 
-//        return redirect()->route('upload.index');
-return view('upload.success', compact('photo'))->with('success', 'Je bestand is succesvol geüpload!');
+        return redirect()->route('dashboard')->with('success', 'Je bestand is succesvol geüpload!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Upload $upload)
+    public function show(Request $request,Upload $upload)
     {
         $challenges = Challenge::all();
-        return view('upload', compact('upload', 'challenges'));
-
+//        dd($challenges);
+        return view('upload', compact('upload', 'request','challenges'));
     }
 
     /**

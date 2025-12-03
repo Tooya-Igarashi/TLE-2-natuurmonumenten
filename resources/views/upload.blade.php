@@ -6,12 +6,11 @@
 {{--            <h2>{{$upload->$challenges->title}}</h2>--}}
 {{--            <p>{{$upload->challenges->difficulties->difficulty}}</p>--}}
 {{--            <p>{{$upload->$challenges->description}}</p>--}}
-
             @foreach($challenges as $challenge)
 
                   <div class="pb-10">
                       <h1 class="text-2xl font-semibold mb-6">{{ $challenge->title }}</h1>
-                      <p>moeilijksheid graad: {{$challenge->difficulty->difficulty}}</p>
+                      <p> {{$challenge->difficulty->difficulty}}</p>
                       <p>{{ $challenge->description }}</p>
                       <p>{{$challenge->duration}} minuten</p>
 
