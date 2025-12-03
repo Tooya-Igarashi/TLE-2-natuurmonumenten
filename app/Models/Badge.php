@@ -15,6 +15,10 @@ class Badge extends Model
         'description',
     ];
 
+    public static function create(array $array)
+    {
+    }
+
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'badge_user', 'id_badge', 'user_id')
