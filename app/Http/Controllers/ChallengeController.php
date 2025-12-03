@@ -25,7 +25,11 @@ class ChallengeController extends Controller
 
     public function show(Challenge $challenge)
     {
-        return view('challenges.show', compact('challenge'));
+        $steps = $challenge->steps()->orderBy('step_number')->get();
+        $difficulty = Difficulty::where('id', $challenge->difficulty_id)
+            ->value('difficulty');
+
+        return view('challenges.show', compact('challenge', 'steps', 'difficulty'));
     }
 
     public function create()
