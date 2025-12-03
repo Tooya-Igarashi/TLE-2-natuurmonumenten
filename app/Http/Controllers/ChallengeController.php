@@ -23,6 +23,11 @@ class ChallengeController extends Controller
         return view('dashboard', ['challenges' => $challenges]);
     }
 
+    public function show(Challenge $challenge)
+    {
+        return view('challenges.show', compact('challenge'));
+    }
+
     public function create()
     {
         $difficulties = Difficulty::all();
