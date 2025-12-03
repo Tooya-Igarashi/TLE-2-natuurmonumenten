@@ -1,5 +1,5 @@
 import './bootstrap';
-import './challenge-steps';
+import './steps';
 
 import Alpine from 'alpinejs';
 
