@@ -55,6 +55,11 @@
                 <p>
                     {{ Str::limit($challenge->description, 120) }}
                 </p>
+                <a href="{{ route('challenges.show', $challenge) }}"
+                   class="text-xl font-semibold text-white hover:underline"
+                   aria-label="Klik om verhaal {{ $challenge->title }} te bekijken">
+                    {{ $challenge->title }}
+                </a>
         </div>
         @empty
             <p>
