@@ -112,7 +112,7 @@
                             </p>
 
                             <div class="flex justify-end">
-                                <a href=""
+                                <a href="{{route('challenges.show', $challenge)}}"
                                    class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg shadow-lg transition">
                                     Meer >
                                 </a>
@@ -137,4 +137,5 @@
         </div>
 
     </div>
+
 </x-app-layout>
