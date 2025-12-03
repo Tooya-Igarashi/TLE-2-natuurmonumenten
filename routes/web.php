@@ -18,9 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/submit', function () {
-    return view('upload');
-})->name('submit');
+Route::get('/submit', [UploadController::class, 'index']);
+//Route::get('/submit', function () {
+////    $challenges = \App\Models\Challenge::all();
+//    return view('upload');
+//})->name('submit');
 
 Route::resource('upload', UploadController::class);
 
