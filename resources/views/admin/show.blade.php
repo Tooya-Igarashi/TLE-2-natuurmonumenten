@@ -24,6 +24,16 @@
             <p><strong>Badge:</strong> {{ $challenge->badge_id }}</p>
             <p><strong>Published:</strong> {{ $challenge->published ? 'Published' : 'Unpublished' }}</p>
             <p><strong>Duration:</strong> {{ $challenge->duration }}</p>
+            @if($challenge->steps->isNotEmpty())
+            @foreach($challenge->steps as $step)
+                <p>
+                    <strong>#{{ $step->step_number }}</strong>
+                    <div>{!! nl2br(e($step->step_description)) !!}</div>
+                </p>
+                @endforeach
+                @else
+                    <p>No steps available.</p>
+                @endif
             <p><strong>Created at:</strong> {{ $challenge->created_at }}</p>
             <p><strong>Updated at:</strong> {{ $challenge->updated_at }}</p>
         </div>

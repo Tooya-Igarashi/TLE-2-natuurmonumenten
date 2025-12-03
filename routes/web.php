@@ -14,6 +14,8 @@ Route::get('/dashboard', function () {
 
 Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
 Route::get('admin/{challenge}', [AdminController::class, 'show'])->name('admin.show');
+Route::get('admin/{challenge}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+Route::patch('admin/{challenge}', [AdminController::class, 'update'])->name('admin.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -2,58 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
 </head>
 <body>
 <header>
-<h1>Admin</h1>
+    <h1>Admin</h1>
 </header>
 <main>
     <table class="mx-auto">
         <thead>
         <tr>
-        <th class="px-4 py-2">ID</th>
-        <th class="px-4 py-2">Title</th>
-        <th class="px-4 py-2">Description</th>
-        <th class="px-4 py-2">Difficulty</th>
-        <th class="px-4 py-2">User ID</th>
-        <th class="px-4 py-2">Badge</th>
-        <th class="px-4 py-2">Published</th>
-        <th class="px-4 py-2">Duration</th>
-        <th class="px-4 py-2">Created at</th>
-        <th class="px-4 py-2">Updated at</th>
-            <th class="px-4 py-2">Details</th>
+            <th>ID</th><th>Title</th><th>Description</th><th>Difficulty</th><th>User ID</th>
+            <th>Badge</th><th>Published</th><th>Duration</th><th>Created at</th><th>Updated at</th><th>Show</th><th>Edit</th>
         </tr>
         </thead>
-
         <tbody>
-        @foreach($challenge as $challenges)
-        <tr class="border-t">
-            <td class="px-4 py-2">{{ $challenges->id }}</td>
-            <td class="px-4 py-2">{{ $challenges->title }}</td>
-            <td class="px-4 py-2">{{ Str::limit( $challenges->description, 20) }}</td>
-            <td class="px-4 py-2">{{ $challenges->difficulty_id}}</td>
-            <td class="px-4 py-2">{{ $challenges->user_id }}</td>
-            <td class="px-4 py-2">{{ $challenges->badge_id }}</td>
-            <td class="px-4 py-2">@if($challenges->published === 1)
-                                      Published
-                                    @else
-                                        Unpublished
-            @endif</td>
-            <td class="px-4 py-2">{{ $challenges->duration }}</td>
-            <td class="px-4 py-2">{{ $challenges->created_at }}</td>
-            <td class="px-4 py-2">{{ $challenges->updated_at }}</td>
-            <td>
-                <a href="{{ route('admin.show', $challenges) }}"
-                   class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
-                    Show
-                </a>
-        </tr>
-
+        @foreach($challenges as $challenge)
+            <tr class="border-t">
+                <td>{{ $challenge->id }}</td>
+                <td>{{ $challenge->title }}</td>
+                <td>{{ Str::limit($challenge->description, 20) }}</td>
+                <td>{{ $challenge->difficulty_id }}</td>
+                <td>{{ $challenge->user_id }}</td>
+                <td>{{ $challenge->badge_id }}</td>
+                <td>{{ $challenge->published ? 'Published' : 'Unpublished' }}</td>
+                <td>{{ $challenge->duration }}</td>
+                <td>{{ $challenge->created_at }}</td>
+                <td>{{ $challenge->updated_at }}</td>
+                <td>
+                    <a href="{{ route('admin.show', $challenge) }}" class="bg-green-600 text-white px-3 py-1 rounded">Show</a>
+                </td>
+                <td>
+                    <a href="{{ route('admin.edit', $challenge) }}" class="bg-blue-600 text-white px-3 py-1 rounded">Edit</a>
+                </td>
+            </tr>
         @endforeach
+        </tbody>
     </table>
 </main>
 </body>
