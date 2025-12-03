@@ -60,6 +60,8 @@ class ChallengeController extends Controller
         $challenge->user_id = auth()->id();
         $challenge->image_path = $path;
         $challenge->save();
+        $challenge->joinedUsers()->attach(auth()->id());
+
 
 // 2. Steps opslaan (alleen als aanwezig)
         if ($request->has('steps') && $request->steps) {
