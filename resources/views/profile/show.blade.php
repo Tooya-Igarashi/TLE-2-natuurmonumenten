@@ -62,7 +62,7 @@
 
                     <div class="mt-4 w-full">
                         <div class="h-4 w-full rounded-full border border-black overflow-hidden">
-                            <div class="h-full bg-blue-500" style="width: {{ $earnedBadgesCount*200 }}%;"></div>
+                            <div class="h-full bg-blue-500" style="width: {{ $earnedBadgesCount*5 }}%;"></div>
                         </div>
                         <p class="text-center text-sm mt-1">{{ $earnedBadgesCount*5 }}%</p>
                     </div>
