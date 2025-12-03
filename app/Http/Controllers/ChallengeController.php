@@ -39,13 +39,13 @@ class ChallengeController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string|max:500',
             'difficulty_id' => 'required|exists:difficulties,id',
-            'badge_id' => 'nullable|exists:badges,id',
+            'badge_id' => 'required|exists:badges,id',
             'published' => 'boolean',
-            'duration' => 'required|date_format:H:i:s',
-            'steps.*' => 'nullable|string',
-            'image_path' => 'nullable|image|max:2048',
+            'duration' => 'required|date_format:H:i',
+            'steps.*' => 'nullable|string|max:50',
+            'image_path' => 'required|image|max:2048',
         ]);
 
         $path = null;

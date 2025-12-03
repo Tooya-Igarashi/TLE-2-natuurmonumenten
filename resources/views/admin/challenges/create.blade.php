@@ -98,9 +98,9 @@
 
             {{-- Duration --}}
             <div>
-                <label class="font-semibold text-white">Duration (HH:MM:SS)</label>
+                <label class="font-semibold text-white">Duration (HH:MM)</label>
                 <input name="duration" type="text" value="{{ old('duration') }}"
-                       class="w-full border border-gray-300 rounded p-2 text-black" placeholder="01:30:00" required>
+                       class="w-full border border-gray-300 rounded p-2 text-black" placeholder="01:30" required>
                 @error('duration')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -191,6 +191,7 @@
                 `;
 
                     stepsList.appendChild(stepDiv);
+                    stepsList.setAttribute('class', 'text-white font-semibold');
                     updateStepNumbers();
 
                     // Add remove functionality

@@ -13,9 +13,9 @@ class BadgeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'nullable|image|max:2048',
+            'name' => 'required|string|max:50',
+            'description' => 'required|string|max:500',
+            'image' => 'required|image|max:2048',
         ]);
         $path = null;
 
