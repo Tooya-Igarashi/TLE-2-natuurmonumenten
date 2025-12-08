@@ -4,7 +4,7 @@
     <div class=" p-14 flex flex-col md:flex-row gap-20 justify-center">
         <div class="bg-emerald-500 p-14 rounded-2xl ">
                 <div class="pb-10">
-                    <h1 class="text-2xl font-semibold mb-6">{{ $challenge->title }}</h1>
+                    <h1 class="text-3xl font-semibold mb-6">{{ $challenge->title }}</h1>
                     <p> {{$challenge->difficulty->difficulty}}</p>
                     <p>{{ $challenge->description }}</p>
                     <p>{{$challenge->duration}} minuten</p>
@@ -15,10 +15,9 @@
                     <img src="{{asset($challenge->badge->image)}}" alt="{{$challenge->badge->name}}" class="h-20 rounded-lg  object-cover">
 
                     <div>
-                        <p>{{$challenge->badge->name}}</p>
+                        <p class="text-2xl font-bold">{{$challenge->badge->name}}</p>
                         <p>{{$challenge->badge->description}}</p>
                     </div>
-
                </div>
             <div class="pt-3">
                 <a href="{{ route('dashboard') }}" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg shadow-lg transition">Ga terug</a>

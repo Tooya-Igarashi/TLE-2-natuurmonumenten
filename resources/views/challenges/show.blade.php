@@ -109,8 +109,6 @@
                                     </a>
                                 </div>
                         @endif
-                    @else
-                        <p>Log in om deze challenge in te leveren.</p>
                     @endauth
 
 
